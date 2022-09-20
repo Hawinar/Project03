@@ -1,0 +1,16 @@
+C:\Users\Admin\source\repos\Project03\Project03\obj\Debug\Project03.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\Project03\Project03\obj\Debug\Project03.csproj.SuggestedBindingRedirects.cache
+C:\Users\Admin\source\repos\Project03\Project03\obj\Debug\MainWindow.g.cs
+C:\Users\Admin\source\repos\Project03\Project03\obj\Debug\App.g.cs
+C:\Users\Admin\source\repos\Project03\Project03\obj\Debug\Project03_MarkupCompile.cache
+C:\Users\Admin\source\repos\Project03\Project03\obj\Debug\Project03_MarkupCompile.lref
+C:\Users\Admin\source\repos\Project03\Project03\bin\Debug\Project03.exe.config
+C:\Users\Admin\source\repos\Project03\Project03\bin\Debug\Project03.exe
+C:\Users\Admin\source\repos\Project03\Project03\bin\Debug\Project03.pdb
+C:\Users\Admin\source\repos\Project03\Project03\obj\Debug\MainWindow.baml
+C:\Users\Admin\source\repos\Project03\Project03\obj\Debug\Project03.g.resources
+C:\Users\Admin\source\repos\Project03\Project03\obj\Debug\Project03.Properties.Resources.resources
+C:\Users\Admin\source\repos\Project03\Project03\obj\Debug\Project03.csproj.GenerateResource.cache
+C:\Users\Admin\source\repos\Project03\Project03\obj\Debug\Project03.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\Project03\Project03\obj\Debug\Project03.exe
+C:\Users\Admin\source\repos\Project03\Project03\obj\Debug\Project03.pdb
