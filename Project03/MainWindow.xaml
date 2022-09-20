@@ -37,8 +37,7 @@
         <RadioButton x:Name="rbCramer" Content="Метод Крамера" HorizontalAlignment="Left" Margin="163,183,0,0" VerticalAlignment="Top" Height="18" Checked="rbCramer_Checked"/>
         <RadioButton x:Name="rbJordanGauss" Content="Метод Жордана-Гаусса" HorizontalAlignment="Left" Margin="163,203,0,0" VerticalAlignment="Top" Checked="rbJordanGauss_Checked"/>
         <RadioButton x:Name="rbGauss" Content="Метод Гаусса" HorizontalAlignment="Left" Margin="163,223,0,0" VerticalAlignment="Top" Checked="rbGauss_Checked"/>
-        <RadioButton x:Name="rbSimpleIteration" Content="Метод простой итерации" HorizontalAlignment="Left" Margin="163,243,0,0" VerticalAlignment="Top" Checked="rbSimpleIteration_Checked"/>
-        <RadioButton x:Name="rbSeidel" Content="Метод Зейделя" HorizontalAlignment="Left" Margin="163,263,0,0" VerticalAlignment="Top" Checked="rbSeidel_Checked"/>
+        <RadioButton x:Name="rbSeidel" Content="Метод Зейделя" HorizontalAlignment="Left" Margin="163,243,0,0" VerticalAlignment="Top" Checked="rbSeidel_Checked"/>
         <Label Content="Выберите метод" HorizontalAlignment="Left" Margin="193,141,0,0" VerticalAlignment="Top"/>
 
         <Button x:Name="btCompute" Content="Высчитать" HorizontalAlignment="Left" Margin="137,0,0,16" VerticalAlignment="Bottom" Click="btCompute_Click"/>

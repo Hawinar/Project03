@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Security.Policy;
 using System.Windows;
-using System.Windows.Media;
 
 namespace Project03
 {
@@ -38,9 +36,6 @@ namespace Project03
                              double.Parse(tbMiddleX1.Text), double.Parse(tbMiddleX2.Text), double.Parse(tbMiddleX3.Text), double.Parse(tbMiddleEquivalent.Text),
                              double.Parse(tbLowerX1.Text), double.Parse(tbLowerX2.Text), double.Parse(tbLowerX3.Text), double.Parse(tbLowerEquivalent.Text)).ToString()
                              + "\nДержу в курсе, если в ответе есть -0.003, то просто не обращайте на него внимания, и тогда правильнымы ответами являются первые 2 числа");
-                        break;
-                    case "rbSimpleIteration":
-
                         break;
                     case "rbSeidel":
                         MessageBox.Show("Ответ:" + Seidel(double.Parse(tbUpperX1.Text), double.Parse(tbUpperX2.Text), double.Parse(tbUpperEquivalent.Text),
@@ -88,13 +83,7 @@ namespace Project03
                 tbLowerX3.Visibility = Visibility.Visible;
                 lbLowerEqual.Visibility = Visibility.Visible;
                 tbLowerEquivalent.Visibility = Visibility.Visible;
-                //Ну нужно хоть передать в метод, чтобы не было исключения
-                tbUpperX3.Text = "0";
-                tbMiddleX3.Text = "0";
-                tbLowerX1.Text = "0";
-                tbLowerX2.Text = "0";
-                tbLowerX3.Text = "0";
-                tbLowerEquivalent.Text = "0";
+                
 
                 rbJordanGauss.Visibility = Visibility.Hidden;
                 rbJordanGauss.IsChecked = false;
@@ -125,7 +114,14 @@ namespace Project03
                 lbLowerEqual.Visibility = Visibility.Hidden;
                 tbLowerEquivalent.Visibility = Visibility.Hidden;
                 tbLowerEquivalent.Text = string.Empty;
-               
+
+                //Ну нужно хоть передать в метод, чтобы не было исключения
+                tbUpperX3.Text = "0";
+                tbMiddleX3.Text = "0";
+                tbLowerX1.Text = "0";
+                tbLowerX2.Text = "0";
+                tbLowerX3.Text = "0";
+                tbLowerEquivalent.Text = "0";
 
                 rbJordanGauss.Visibility = Visibility.Visible;
                 rbSeidel.Visibility = Visibility.Visible;
@@ -241,110 +237,66 @@ namespace Project03
             {
 
                 double Coefficient = 0;
+                Coefficient = UpperX1;
+
+                UpperX1 /= Coefficient;
+                UpperX2 /= Coefficient;
+                UpperEquivalent /= Coefficient;
 
                 Coefficient = MiddleX1;
-                //от 2 строки отнимаем 1 строку, умноженную на Coefficient
-                MiddleX1 -= UpperX1 * Coefficient;
-                MiddleX2 -= UpperX2 * Coefficient;
-                MiddleEquivalent -= UpperEquivalent * Coefficient;
+
+                MiddleX1 = (Coefficient * UpperX1) - MiddleX1;
+                MiddleX2 = (Coefficient * UpperX2) - MiddleX2;
+                MiddleEquivalent = (Coefficient * UpperEquivalent) - MiddleEquivalent;
 
                 Coefficient = MiddleX2;
-                //2-ую строку делим на Coefficient
-                MiddleX1 /= Coefficient;
-                MiddleX2 /= Coefficient;
-                MiddleEquivalent /= Coefficient;
 
-                double toNegative = 1;
-                Coefficient = MiddleX2 * toNegative;
-                //к 1 строке добавляем 2 строку, умноженную на Coefficient
-                UpperX1 += MiddleX1 * Coefficient;
-                UpperX2 += MiddleX2 * Coefficient;
-                UpperEquivalent += MiddleEquivalent * Coefficient;
+                MiddleX1 = MiddleX1 / Coefficient;
+                MiddleX2 = MiddleX2 / Coefficient;
+                MiddleEquivalent = MiddleEquivalent / Coefficient;
 
-                double x1 = UpperEquivalent;
+                double x1 = 0;
                 double x2 = MiddleEquivalent;
+                x1 = UpperEquivalent - (UpperX2 * UpperX2);
+
+
                 return (x1, x2, -0.003); //Ну вернуться должно 3 значения и во избежание неловкой ситуации, приходится хоть что-то вернуть
 
             }
             else
             {
                 double Coefficient = 0;
+                double toNegative = -1;
+                double tmp = 0;
 
                 Coefficient = UpperX1;
-                //1-ую строку делим на Coefficient
-                UpperX1 /= Coefficient;
-                UpperX2 /= Coefficient;
-                UpperX3 /= Coefficient;
-                UpperEquivalent /= Coefficient;
+                //Далее умножаем 2-ую строку на Coefficient и добавляем к первой:
+                UpperX1 += MiddleX1 * Coefficient;
+                UpperX2 += MiddleX2 * Coefficient;
+                UpperX3 += MiddleX3 * Coefficient;
+                UpperEquivalent += MiddleEquivalent * Coefficient;
 
-                Coefficient = MiddleX1;
-                //от 2 строки отнимаем 1 строку, умноженную на Coefficient
-                MiddleX1 -= UpperX1 * Coefficient;
-                MiddleX2 -= UpperX2 * Coefficient;
-                MiddleX3 -= UpperX3 * Coefficient;
-                MiddleEquivalent -= UpperEquivalent * Coefficient;
-
-                Coefficient = LowerX1;
-                //от 3 строки отнимаем 1 строку, умноженную на Coefficient
-                LowerX1 -= UpperX1 * Coefficient;
-                LowerX2 -= UpperX2 * Coefficient;
-                LowerX3 -= UpperX3 * Coefficient;
-                LowerEquivalent -= UpperEquivalent * Coefficient;
+                //Добавим 3-ую строку к 2-ой
+                MiddleX1 += LowerX1;
+                MiddleX2 += LowerX2;
+                MiddleX3 += LowerX3;
+                MiddleEquivalent += LowerEquivalent;
 
                 Coefficient = MiddleX2;
-                //2-ую строку делим на Coefficient
-                MiddleX1 /= Coefficient;
-                MiddleX2 /= Coefficient;
-                MiddleX3 /= Coefficient;
-                MiddleEquivalent /= Coefficient;
+                tmp = LowerX1 * toNegative;
+                //Умножим первую строчку на (3), 2-ую строку умножаем на (-1). Следующее действие: складываем первую и вторую строки:
+                UpperX1 = (UpperX1 * Coefficient) + (MiddleX1 * tmp);
+                UpperX2 = (UpperX2 * Coefficient) + (MiddleX2 * tmp);
+                UpperX3 = (UpperX3 * Coefficient) + (MiddleX3 * tmp);
+                UpperEquivalent = (UpperEquivalent * Coefficient) + (MiddleEquivalent * tmp);
 
-                Coefficient = UpperX2;
-                //от 1 строки отнимаем 2 строку, умноженную на Coefficient
-                UpperX1 -= MiddleX1 * Coefficient;
-                UpperX2 -= MiddleX2 * Coefficient;
-                UpperX3 -= MiddleX3 * Coefficient;
-                UpperEquivalent -= MiddleEquivalent * Coefficient;
-
-                Coefficient = UpperX3;
-                //от 3 строки отнимаем 2 строку, умноженную на Coefficient
-                LowerX1 -= MiddleX1 * Coefficient;
-                LowerX2 -= MiddleX2 * Coefficient;
-                LowerX3 -= MiddleX3 * Coefficient;
-                LowerEquivalent -= MiddleEquivalent * Coefficient;
-
-                Coefficient = LowerX3;
-                //3-ую строку делим на Coefficient
-                LowerX1 /= Coefficient;
-                LowerX2 /= Coefficient;
-                LowerX3 /= Coefficient;
-                LowerEquivalent /= Coefficient;
-
-                Coefficient = UpperX3;
-                //от 1 строки отнимаем 3 строку, умноженную на Coefficient
-                UpperX1 -= LowerX1 * Coefficient;
-                UpperX2 -= LowerX2 * Coefficient;
-                UpperX3 -= LowerX3 * Coefficient;
-                UpperEquivalent -= LowerEquivalent * Coefficient;
-
-                double toNegative = -1;
-                Coefficient = MiddleX3 * toNegative;
-                //к 2 строке добавляем 3 строку, умноженную на Coefficient
-                MiddleX1 += LowerX1 * Coefficient;
-                MiddleX2 += LowerX2 * Coefficient;
-                MiddleX3 += LowerX3 * Coefficient;
-                MiddleEquivalent += LowerEquivalent * Coefficient;
-
-                double x1 = UpperEquivalent;
-                double x2 = MiddleEquivalent;
-                double x3 = LowerEquivalent;
+                //Теперь исходную систему можно записать как:
+                double x1 = (UpperEquivalent / UpperX3);
+                double x2 = (MiddleEquivalent - MiddleX3 * MiddleX2)/MiddleX2;
+                double x3 = (LowerEquivalent - LowerX2 * LowerX2 - LowerX3 * LowerX3);
                 return (x1, x2, x3);
             }
         }
-        public void SimpleIteration()
-        {
-
-        }
-
         public (double, double) Seidel(double UpperX1, double UpperX2, double UpperEquivalent,
            double MiddleX1, double MiddleX2, double MiddleEquivalent)
         {
